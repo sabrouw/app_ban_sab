@@ -3,24 +3,22 @@ package com.sab.banking.models;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue
-    private Integer id;
+@Table(name = "_user")
+public class User extends AbstractEntity {
 
     private String firstName;
 

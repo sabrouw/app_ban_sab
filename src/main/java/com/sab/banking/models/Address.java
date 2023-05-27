@@ -1,23 +1,20 @@
 package com.sab.banking.models;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Address {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Address extends AbstractEntity {
 
     private String street;
 

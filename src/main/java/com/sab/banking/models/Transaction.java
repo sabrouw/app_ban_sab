@@ -12,17 +12,16 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class Transaction {
-    @Id
-    @GeneratedValue
-    private Integer id;
+public class Transaction extends AbstractEntity {
 
     private BigDecimal mount;
 
@@ -30,10 +29,6 @@ public class Transaction {
     private TransactionType type;
 
     private String destinationIban;
-
-    private LocalDateTime creationDate;
-
-    private LocalDateTime lastUpdated;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
