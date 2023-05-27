@@ -17,12 +17,27 @@ public class ContactDto {
 
     private Integer id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank
+    @Size(min = 6, max = 16)
     private String firstName;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Size(min = 6, max = 16)
     private String lastName;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Email
     private String email;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String iban;
 
     private Integer userId;

@@ -15,14 +15,30 @@ import lombok.Setter;
 public class AddressDto {
     private Integer id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String street;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private Integer houseNumber;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Max(value = 5)
     private Integer zipCode;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String city;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String country;
 
     private Integer userId;

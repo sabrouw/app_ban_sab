@@ -1,5 +1,9 @@
 package com.sab.banking.dto;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.sab.banking.models.User;
 
 import lombok.AllArgsConstructor;
@@ -15,12 +19,28 @@ public class UserDto {
 
     private Integer id;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Size(min = 6, max = 16)
     private String firstName;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Size(min = 6, max = 16)
     private String lastName;
 
+    @NotNull
+    @NotEmpty
+    @Email
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String email;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
+    @Size(min = 6, max = 16)
     private String password;
 
     public static UserDto fromEntity(User user) {

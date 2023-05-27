@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Positive;
 
 import com.sab.banking.models.Transaction;
 import com.sab.banking.models.TransactionType;
@@ -22,10 +25,16 @@ public class TransactionDto {
 
     private Integer id;
 
+    @Positive
+    @Max(value = 10000)
+    @Min(value = 10)
     private BigDecimal mount;
 
     private TransactionType type;
 
+    @NotNull
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String destinationIban;
 
     private Integer userId;

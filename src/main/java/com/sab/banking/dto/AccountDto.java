@@ -12,8 +12,12 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class AccountDto {
+
     private Integer id;
 
+    @NotNull(message = "Ce champs ne doit pas être vide")
+    @NotEmpty
+    @NotBlank(message = "Ce champs ne doit pas être vide")
     private String iban;
 
     private UserDto user;
