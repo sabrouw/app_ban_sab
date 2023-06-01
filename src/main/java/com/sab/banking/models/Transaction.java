@@ -1,13 +1,10 @@
 package com.sab.banking.models;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -23,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 public class Transaction extends AbstractEntity {
 
-    private BigDecimal mount;
+    private BigDecimal amount;
 
     @Enumerated(EnumType.STRING)
     private TransactionType type;

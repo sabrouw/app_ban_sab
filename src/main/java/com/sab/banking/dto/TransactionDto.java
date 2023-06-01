@@ -2,10 +2,10 @@ package com.sab.banking.dto;
 
 import java.math.BigDecimal;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import javax.validation.constraints.Positive;
 
 import com.sab.banking.models.Transaction;
@@ -26,9 +26,7 @@ public class TransactionDto {
     private Integer id;
 
     @Positive
-    @Max(value = 10000)
-    @Min(value = 10)
-    private BigDecimal mount;
+    private BigDecimal amount;
 
     private TransactionType type;
 
@@ -43,7 +41,7 @@ public class TransactionDto {
         return TransactionDto.builder()
                 .id(transaction.getId())
                 .type(transaction.getType())
-                .mount(transaction.getMount())
+                .amount(transaction.getAmount())
                 .destinationIban(transaction.getDestinationIban())
                 .userId(transaction.getUser().getId())
                 .build();
@@ -53,12 +51,12 @@ public class TransactionDto {
         return Transaction.builder()
                 .id(transaction.getId())
                 .type(transaction.getType())
-                .mount(transaction.getMount())
+                .amount(transaction.getAmount())
                 .destinationIban(transaction.getDestinationIban())
-                .user(
-                        User.builder()
-                                .id(transaction.getUserId())
-                                .build())
+                .user(User.builder()
+                        .id(transaction.getUserId())
+                        .build())
                 .build();
+
     }
 }

@@ -1,5 +1,7 @@
 package com.sab.banking.services;
 
-public interface AddressService {
-    
+import com.sab.banking.dto.AddressDto;
+
+public interface AddressService extends AbstractService<AddressDto> {
+
 }

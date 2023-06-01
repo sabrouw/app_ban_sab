@@ -1,6 +1,6 @@
 package com.sab.banking.services;
 
-import org.hibernate.mapping.List;
+import java.util.List;
 
 public interface AbstractService<T> {
 
@@ -8,8 +8,7 @@ public interface AbstractService<T> {
 
     List<T> findAll();
 
-    T findById(
-            Integer id);
+    T findById(Integer id);
 
     void delete(Integer id);
 }

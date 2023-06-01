@@ -1,5 +1,10 @@
 package com.sab.banking.dto;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import com.sab.banking.models.Address;
 import com.sab.banking.models.User;
 

@@ -1,6 +1,11 @@
 package com.sab.banking.dto;
 
-import com.sab.banking.models.AbstractEntity;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import com.sab.banking.models.Contact;
 import com.sab.banking.models.User;
 

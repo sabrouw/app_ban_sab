@@ -1,12 +1,19 @@
 package com.sab.banking.services.impl;
 
-import java.util.stream.Collector;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.apache.tomcat.jni.User;
 import org.springframework.stereotype.Service;
+
+import com.sab.banking.ObjectsValidator;
+import com.sab.banking.dto.AccountDto;
+import com.sab.banking.dto.UserDto;
+import com.sab.banking.models.User;
+import com.sab.banking.repositories.UserRepository;
+import com.sab.banking.services.AccountService;
+import com.sab.banking.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,40 +22,55 @@ import lombok.RequiredArgsConstructor;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
-    private final ObjectsValidator<UserDto> objectsValidator;
+    private final AccountService accountService;
+    private final ObjectsValidator<UserDto> validator;
 
     @Override
     public Integer save(UserDto dto) {
-        // on valide notre objet avec la gestion d'exeption globale
         validator.validate(dto);
-        // si l'objet est validé on persiste les données
-        // on transforme le userdto en objet user
         User user = UserDto.toEntity(dto);
-        // on persiste la donnée
         return repository.save(user).getId();
     }
 
     @Override
     public List<UserDto> findAll() {
         return repository.findAll()
-                // parcours ma liste utilisateurs et les renvoyer transformer en dto
                 .stream()
-                .map(userDto::fromEntity)
-                // assemble les informations
+                .map(UserDto::fromEntity)
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserDto findById(Integer id) {
         return repository.findById(id)
-                .map(userDto::fromEntity)
+                .map(UserDto::fromEntity)
                 .orElseThrow(() -> new EntityNotFoundException("pas d'utilisateur trouvé"));
     }
 
     @Override
     public void delete(Integer id) {
-        // VERIFIER que l'utilisateur n'a ps un compte car on supprime toutes les
-        // dépendance aussi
         repository.deleteById(id);
+    }
+
+    @Override
+    public Integer validateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("pas d'utilisateur trouvé pour ce compte validation"));
+        user.setActive(true);
+        AccountDto account = AccountDto.builder()
+                .user(UserDto.fromEntity(user))
+                .build();
+        accountService.save(account);
+        repository.save(user);
+        return user.getId();
+    }
+
+    @Override
+    public Integer inValidateAccount(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("pas d'utilisateur trouvé pour ce compte validation"));
+        user.setActive(false);
+        repository.save(user);
+        return user.getId();
     }
 }
