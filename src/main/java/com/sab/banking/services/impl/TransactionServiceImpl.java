@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityNotFoundException;
+
 import org.springframework.stereotype.Service;
 
 import com.sab.banking.ObjectsValidator;
@@ -57,10 +59,10 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public List<Transaction> findAllByUserId(Integer UserId) {
-        return repository.findAllByUserId(UserId)
+    public List<TransactionDto> findAllByUserId(Integer userId) {
+        return repository.findAllByUserId(userId)
                 .stream()
-                .map(TransactionDto.fromEntity(null))
+                .map(TransactionDto::fromEntity)
                 .collect(Collectors.toList());
 
     }

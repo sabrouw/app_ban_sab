@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sab.banking.dto.ContactDto;
-import com.sab.banking.models.Contact;
 import com.sab.banking.services.ContactService;
 
 import lombok.RequiredArgsConstructor;
@@ -39,11 +38,11 @@ public class ContactController {
         return ResponseEntity.ok(service.findById(contactId));
     }
 
-    @GetMapping("/users/{user-id}")
-    public ResponseEntity<List<Contact>> findAllByUserId(
-            @PathVariable("user-id") Integer userId) {
-        return ResponseEntity.ok(service.findAllByUserId(userId));
-    }
+    // @GetMapping("/users/{user-id}")
+    // public ResponseEntity<List<Contact>> findAllByUserId(
+    // @PathVariable("user-id") Integer userId) {
+    // return ResponseEntity.ok(service.findAllByUserId(userId));
+    // }
 
     @DeleteMapping("/{contact-id}")
     public ResponseEntity<Void> delete(

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sab.banking.dto.TransactionDto;
-import com.sab.banking.models.Transaction;
 import com.sab.banking.services.TransactionService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,7 +33,7 @@ public class TransactionController {
     }
 
     @GetMapping("/users/{user-id}")
-    public ResponseEntity<List<Transaction>> findAllByUserId(
+    public ResponseEntity<List<TransactionDto>> findAllByUserId(
             @PathVariable("user-id") Integer userId) {
         return ResponseEntity.ok(service.findAllByUserId(userId));
     }
