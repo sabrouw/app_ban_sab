@@ -1,0 +1,1 @@
+web: java target/banking-1.0.0-SNAPSHOT.jar

@@ -4,7 +4,6 @@ import javax.persistence.EntityNotFoundException;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.sab.banking.repositories.UserRepository;
@@ -18,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws EntityNotFoundException {
         return repository.findByEmail(email)
                 .orElseThrow(() -> new EntityNotFoundException("aucun utilisateur ne correspond à cet email"));
 

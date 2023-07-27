@@ -29,44 +29,48 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests(
-                        (request) -> {
-                            try {
-                                request.antMatchers(
-                                        "/**/auth",
-                                        // "/**/authenticate",
-                                        "/**/register"
-                                // "/api/access/**",
-                                // "/h2-console/**",
-                                // "/v2/api-docs",
-                                // "/v3/api-docs",
-                                // "/v3/api-docs/**",
-                                // "/swagger-resources",
-                                // "/swagger-resources/**",
-                                // "/configuration/ui",
-                                // "/configuration/security",
-                                // "/swagger-ui/**",
-                                // "/webjars/**",
-                                // "/swagger-ui.html")
-                                ).permitAll()
-                                        .anyRequest()
-                                        .authenticated();
-                                // .and()
-                                // .sessionManagement()
-                                // .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        })
-                .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .cors();
+                .authorizeRequests()
+                .anyRequest()
+                .permitAll()
+                .and()
+                .csrf().disable();
+        // .authorizeRequests(
+        // (request) -> {
+        // try {
+        // request.antMatchers(
+        // "/**/auth",
+        // "/**/authenticate",
+        // "/**/register",
+        // "/api/access/**",
+        // "/h2-console/**",
+        // "/v2/api-docs",
+        // "/v3/api-docs",
+        // "/v3/api-docs/**",
+        // "/swagger-resources",
+        // "/swagger-resources/**",
+        // "/configuration/ui",
+        // "/configuration/security",
+        // "/swagger-ui/**",
+        // "/webjars/**",
+        // "/swagger-ui.html")
+        // .permitAll()
+        // .anyRequest()
+        // .authenticated();
+        // .and()
+        // .sessionManagement()
+        // .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // } catch (Exception e) {
+        // e.printStackTrace();
+        // }
+        // })
+        // .authenticationProvider(authenticationProvider())
+        // .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+        // .cors();
 
         return http.build();
     }
 
-    // @Bea
+    @Bean
     public CorsFilter corsFilter() {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         final CorsConfiguration config = new CorsConfiguration();
